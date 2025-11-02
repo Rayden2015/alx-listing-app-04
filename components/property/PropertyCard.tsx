@@ -1,4 +1,5 @@
 import React from 'react';
+import { useRouter } from 'next/router';
 import { PropertyProps } from '@/interfaces';
 import Pill from '@/components/common/Pill';
 
@@ -7,6 +8,13 @@ interface PropertyCardProps {
 }
 
 const PropertyCard: React.FC<PropertyCardProps> = ({ property }) => {
+  const router = useRouter();
+
+  const handleClick = () => {
+    if (property.id) {
+      router.push(`/property/${property.id}`);
+    }
+  };
   const {
     name,
     address,
@@ -31,7 +39,10 @@ const PropertyCard: React.FC<PropertyCardProps> = ({ property }) => {
   };
 
   return (
-    <div className="border rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300">
+    <div 
+      className="border rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300 cursor-pointer"
+      onClick={handleClick}
+    >
       {/* Image Section */}
       <div className="relative">
         <img 
